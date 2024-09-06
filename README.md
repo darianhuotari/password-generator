@@ -17,6 +17,8 @@ This assumes you want to use port 8000 to access the application.
 
 Todo:
 
-Containerize
+Add container to registry
+
+Add instructions for deploying in k3s
 
 Add test coverage
