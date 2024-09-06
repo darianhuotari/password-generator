@@ -2,9 +2,9 @@
 
 This is a simple password generater written in Python and served via FastAPI.
 
-## Usage:
+# Usage:
 
-# Docker:
+### Docker:
 
 1. CD into the root directory of the project
 2. Build the image: `docker build -t pwdgen .`
