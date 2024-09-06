@@ -7,11 +7,9 @@ def generate_password(pwdLength: int):
     # Define a default password length # TODO - check if value is empty or string?
     defaultLength =int(20)
 
-    # Raise an exception instead of return
-    if pwdLength == 0:
-        return ("Password length cannot be 0")
-    elif pwdLength < 0:
-        return ("Password length cannot be negative")
+    # Raise an exception if length is <= 0
+    if pwdLength <= 0:
+        raise ("Password length cannot be less than or equal to 0")
     
     # Build lists of candidate characters to be used in the password
     s1 = string.ascii_letters

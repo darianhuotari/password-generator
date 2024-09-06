@@ -1,15 +1,16 @@
 from PasswordGenerator import pwdgen
 from typing import Optional
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@app.get("/", include_in_schema=False)
+async def docs_redirect():
+    return RedirectResponse(url='/docs')
 
 
-@app.get("/password", summary="Generate a random password", tags=['Password Generator'])
+@app.get("/generate", summary="Generate a random password", tags=['Password Generator'])
 async def read_item(pass_length: Optional[int] = "20"):
     """
     Parameters:<br>
@@ -31,5 +32,3 @@ async def read_item(pass_length: Optional[int] = "20"):
     pwd = pwdgen.generate_password(pwdLength=pass_length)
     response = {"generated_password": pwd}
     return (response)
-
-    ## TODO - add a UI or redirect to swagger from root
