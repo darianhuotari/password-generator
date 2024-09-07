@@ -5,11 +5,13 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
+# Root redirects to swagger-ui
+
 @app.get("/", include_in_schema=False)
 async def docs_redirect():
     return RedirectResponse(url='/docs')
 
-
+# Generate a password
 @app.get("/generate", summary="Generate a random password", tags=['Password Generator'])
 async def read_item(pass_length: Optional[int] = "20"):
     """
@@ -32,3 +34,8 @@ async def read_item(pass_length: Optional[int] = "20"):
     pwd = pwdgen.generate_password(pwdLength=pass_length)
     response = {"generated_password": pwd}
     return (response)
+
+# Simple health endpoint
+@app.get("/health", summary="Health status", tags="healthcheck")
+def health_check():
+    return {"status": "OK"}
