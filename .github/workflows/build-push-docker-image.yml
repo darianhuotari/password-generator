@@ -17,7 +17,7 @@ jobs:
         run: |
           VER=$(cat VERSION)
           echo "VERSION=$VER" >> $GITHUB_ENV
-          echo $VERSION
+          echo "The version is: $VERSION" 
         
       - name: Login to Docker Hub
         uses: docker/login-action@v3
