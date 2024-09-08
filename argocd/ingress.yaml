@@ -13,4 +13,4 @@ spec:
           service:
             name: pwdgen
             port:
-              name: http
+              number: 8000
