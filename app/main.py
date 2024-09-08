@@ -36,6 +36,6 @@ async def read_item(pass_length: Optional[int] = "20"):
     return (response)
 
 # Simple health endpoint
-@app.get("/health", summary="Health status", tags="healthcheck")
+@app.get("/health", summary="Health status", tags=['healthcheck]'])
 def health_check():
     return {"status": "OK"}
