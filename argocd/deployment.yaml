@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pwdgen
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: pwdgen
+  template:
+    metadata:
+      labels:
+        app: pwdgen
+    spec:
+      containers:
+      - image: docker.io/darianhuotari/password-generator:latest
+        name: pwdgen
+        ports:
+        - containerPort: 8000
