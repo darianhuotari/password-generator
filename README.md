@@ -18,6 +18,11 @@ This assumes you want to use port 8000 to access the application.
 1. Run `docker run --name pwdgen -p 8000:8000 darianhuotari/password-generator:latest`
 
 Todo:
+
+Build a UI
+
+Add feature to compare generated password against haveibeenpwnd API
+
 Add artifact attestation
 
 Add instructions for deploying in k3s

@@ -19,11 +19,11 @@ async def read_item(pass_length: Optional[int] = "20"):
     - pass_length: (int) Length of password to be generated.
 
     Returns:<br>
-    - randomly generated password
+    - generated_password: (str) Password from the password-generator service.
 
     """
     if pass_length is None:
-        return ("This should not happen")
+        return ("This should not happen") # Cast from str to int to allow for null / empty checking? Currently this does nothing.
     if pass_length == 0:
         return ("Password length cannot be 0")
     elif pass_length < 0:
