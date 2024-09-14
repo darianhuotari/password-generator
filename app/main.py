@@ -3,7 +3,22 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# Open up CORS, should probably revisit this later
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Root redirects to swagger-ui
 
