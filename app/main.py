@@ -1,6 +1,6 @@
 from PasswordGenerator import pwdgen
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status, HTTPException
 from fastapi.responses import RedirectResponse
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -28,7 +28,7 @@ async def docs_redirect():
 
 # Generate a password
 @app.get("/generate", summary="Generate a random password", tags=['Password Generator'])
-async def read_item(pass_length: Optional[int] = "20"):
+async def read_item(pass_length: Optional[int] = "20",):
     """
     Parameters:<br>
     - pass_length: (int) Length of password to be generated.
@@ -40,11 +40,20 @@ async def read_item(pass_length: Optional[int] = "20"):
     if pass_length is None:
         return ("This should not happen") # Cast from str to int to allow for null / empty checking? Currently this does nothing.
     if pass_length == 0:
-        return ("Password length cannot be 0")
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Password length cannot be zero"
+        )
     elif pass_length < 0:
-        return ("Password length cannot be negative")
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Password length cannot be negative"
+        )
     elif pass_length < 12:
-        return("Minimum password length is 12. Please try again.")
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Minumum password length is 12, please try again"
+        )
 
     pwd = pwdgen.generate_password(pwdLength=pass_length)
     response = {"generated_password": pwd}
